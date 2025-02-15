@@ -3,11 +3,11 @@ import Link from "next/link";
 
 export function Navbar() {
 
-    return(
+    return (
         <nav className="w-full bg-sky-700 p-4">
-            <div className="container mx-auto flex justify-between items-center">
-                <h1 className="text-4xl font-bold">Transactio</h1>
-                <ul className="flex space-x-4">
+            <div className=" flex items-center pl-10 pr-10">
+                <h1 className="text-4xl font-bold mr-auto">Transactio</h1>
+                <ul className="flex justify-evenly w-1/2">
                     <li>
                         <Link href="/">Dashboard</Link>
                     </li>
@@ -27,10 +27,12 @@ export function Navbar() {
                         <Link href="/reports">Reports</Link>
                     </li>
                 </ul>
-                <div>
+                <div className="ml-auto">
                     logout
                 </div>
             </div>
         </nav>
     )
+
+
 }
