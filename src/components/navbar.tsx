@@ -4,7 +4,7 @@ import Link from "next/link";
 export function Navbar() {
 
     return (
-        <nav className="w-full bg-sky-700 p-4">
+        <nav className="w-full bg-blue-600 p-4 text-white">
             <div className=" flex items-center pl-10 pr-10">
                 <h1 className="text-4xl font-bold mr-auto">Transactio</h1>
                 <ul className="flex justify-evenly w-1/2">
