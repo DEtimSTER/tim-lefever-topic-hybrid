@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import {ReactNode, useState} from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
@@ -28,7 +28,7 @@ export default function Investments() {
     return (
         <>
             <Navbar/>
-            <div className="space-y-6">
+            <div className="space-y-6 p-14">
                 <div className="flex justify-between items-center">
                     <h1 className="text-3xl font-bold">Investments</h1>
                     <Dialog open={isAddingInvestment} onOpenChange={setIsAddingInvestment}>
@@ -79,7 +79,7 @@ export default function Investments() {
                                          dataKey="value">
                                         {data.map((entry, index) => (
                                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}/>
-                                        ))}
+                                        )) as ReactNode}
                                     </Pie>
                                     <Legend/>
                                 </PieChart>
@@ -108,7 +108,7 @@ export default function Investments() {
                                                 {((item.value / data.reduce((acc, cur) => acc + cur.value, 0)) * 100).toFixed(2)}%
                                             </TableCell>
                                         </TableRow>
-                                    ))}
+                                    )) as ReactNode}
                                 </TableBody>
                             </Table>
                         </CardContent>
