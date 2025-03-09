@@ -1,5 +1,5 @@
-"use client"
-import { ReactNode, useState } from "react";
+"use client";
+import { ReactNode, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -73,6 +73,11 @@ export default function Home() {
     const [content, setContent] = useState(
         "This is the first paragraph of the sample document.\n\nThis is the second paragraph with different content.\n\nYou can add as many paragraphs as you need."
     );
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     return (
         <Card className="w-full max-w-2xl mx-auto">
@@ -104,18 +109,20 @@ export default function Home() {
                 </div>
             </CardContent>
             <CardFooter>
-                <PDFDownloadLink
-                    document={<MyPDFDocument title={title} content={content} />}
-                    fileName={`${title.replace(/\s+/g, "-").toLowerCase()}.pdf`}
-                    className="ml-auto"
-                >
-                    {({ loading }) => (
-                        <Button disabled={loading}>
-                            <Download className="mr-2 h-4 w-4" />
-                            {loading ? "Generating PDF..." : "Export to PDF"}
-                        </Button>
-                    ) as ReactNode}
-                </PDFDownloadLink>
+                {isClient && (
+                    <PDFDownloadLink
+                        document={<MyPDFDocument title={title} content={content} />}
+                        fileName={`${title.replace(/\s+/g, "-").toLowerCase()}.pdf`}
+                        className="ml-auto"
+                    >
+                        {({ loading }) => (
+                            <Button disabled={loading}>
+                                <Download className="mr-2 h-4 w-4" />
+                                {loading ? "Generating PDF..." : "Export to PDF"}
+                            </Button>
+                        ) as ReactNode}
+                    </PDFDownloadLink>
+                )}
             </CardFooter>
         </Card>
     );
