@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import { Download } from "lucide-react";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 
@@ -42,30 +43,30 @@ const styles = StyleSheet.create({
     },
 });
 
-const MyPDFDocument = ({ title, content, includeDate, includePageNumbers }) => (
+const MyPDFDocument = ({ title, content }) => (
     <Document>
         <Page size="A4" style={styles.page}>
             <View>
                 <Text style={styles.title}>{title}</Text>
-                {includeDate && <Text style={styles.date}>{new Date().toLocaleDateString()}</Text>}
+                <Text style={styles.date}>{new Date().toLocaleDateString()}</Text>
                 {content.split(/\n\s*\n/).map((paragraph, index) => (
                     <Text key={index} style={styles.paragraph}>{paragraph}</Text>
                 ))}
             </View>
-            {includePageNumbers && (
-                <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`} />
-            ) as ReactNode}
+            <Text
+                style={styles.pageNumber}
+                render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}
+            />
         </Page>
     </Document>
 );
+
 
 export default function Home() {
     const [title, setTitle] = useState("Sample Document");
     const [content, setContent] = useState(
         "This is the first paragraph of the sample document.\n\nThis is the second paragraph with different content.\n\nYou can add as many paragraphs as you need."
     );
-    const [includeDate, setIncludeDate] = useState(true);
-    const [includePageNumbers, setIncludePageNumbers] = useState(true);
 
     return (
         <Card className="w-full max-w-2xl mx-auto">
@@ -98,7 +99,7 @@ export default function Home() {
             </CardContent>
             <CardFooter>
                 <PDFDownloadLink
-                    document={<MyPDFDocument title={title} content={content} includeDate={includeDate} includePageNumbers={includePageNumbers} />}
+                    document={<MyPDFDocument title={title} content={content} />}
                     fileName={`${title.replace(/\s+/g, "-").toLowerCase()}.pdf`}
                     className="ml-auto"
                 >
