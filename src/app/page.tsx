@@ -55,7 +55,7 @@ const MyPDFDocument = ({ title, content, includeDate, includePageNumbers }) => (
             </View>
             {includePageNumbers && (
                 <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`} />
-            )}
+            ) as ReactNode}
         </Page>
     </Document>
 );
@@ -95,16 +95,6 @@ export default function Home() {
                         placeholder="Enter your content here. Use double line breaks to create new paragraphs."
                         className="min-h-[200px]"
                     />
-                </div>
-                <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 pt-4">
-                    <div className="flex items-center space-x-2">
-                        <Switch id="include-date" checked={includeDate} onCheckedChange={setIncludeDate} />
-                        <Label htmlFor="include-date">Include Date</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <Switch id="include-page-numbers" checked={includePageNumbers} onCheckedChange={setIncludePageNumbers} />
-                        <Label htmlFor="include-page-numbers">Include Page Numbers</Label>
-                    </div>
                 </div>
             </CardContent>
             <CardFooter>
