@@ -1,6 +1,5 @@
 "use client"
-
-import {ReactNode, useState} from "react";
+import { ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Download } from "lucide-react";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 
+// Styles
 const styles = StyleSheet.create({
     page: {
         padding: 40,
@@ -43,7 +43,14 @@ const styles = StyleSheet.create({
     },
 });
 
-const MyPDFDocument = ({ title, content }) => (
+// Define types for the props
+interface MyPDFDocumentProps {
+    title: string;
+    content: string;
+}
+
+// MyPDFDocument component with explicit typing
+const MyPDFDocument = ({ title, content }: MyPDFDocumentProps) => (
     <Document>
         <Page size="A4" style={styles.page}>
             <View>
@@ -60,7 +67,6 @@ const MyPDFDocument = ({ title, content }) => (
         </Page>
     </Document>
 );
-
 
 export default function Home() {
     const [title, setTitle] = useState("Sample Document");
